@@ -39,5 +39,12 @@ public class Day1 {
         }
 
         System.out.println("Part 2: " + count);
+        /* --- Golfed Version for fun
+        InputHelper h=new InputHelper();ArrayList<String>i=new ArrayList<>(h.parseInput("day1.txt"));
+        ArrayList<Integer>l=new ArrayList<>(),r=new ArrayList<>();for(String s:i){String[]x=s.split("   ");l.add(Integer.valueOf(x[0]));r.add(Integer.valueOf(x[1]));}
+        Collections.sort(l);Collections.sort(r);int c=0;for(int j=0;j<l.size();j++)c+=Math.abs(l.get(j)-r.get(j));System.out.println("Part 1: "+c);HashMap<Integer,Integer>m=new HashMap<>();c=0;
+        for(int n:r)m.put(n,m.getOrDefault(n,0)+1);for(int n:l)if(m.containsKey(n))c+=n*m.get(n);System.out.println("Part 2: "+c);
+        */
+
     }
 }
