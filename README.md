@@ -1,3 +1,3 @@
 ## AoC Java Solutions by Kyryl Malyshev
 
-My works for AoC 2024.
+My work for AoC 2024.
