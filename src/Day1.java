@@ -19,7 +19,9 @@ public class Day1 {
         Collections.sort(left); Collections.sort(right);
         int count = 0;
 
-        for (int i = 0; i<left.size(); i++) count += Math.max(left.get(i), right.get(i)) - Math.min(left.get(i), right.get(i));
+        for (int i = 0; i<left.size(); i++) {
+            count += Math.max(left.get(i), right.get(i)) - Math.min(left.get(i), right.get(i));
+        }
 
         System.out.println("Part 1: " + count);
 
