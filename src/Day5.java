@@ -23,7 +23,6 @@ public class Day5 {
         Set<RulePair> rulePairs = new HashSet<>();
         for (String rule : rules) {
             String[] splitRule = rule.split("\\|");
-            System.out.println(Arrays.asList(splitRule));
             rulePairs.add(new RulePair(splitRule[0], splitRule[1]));
         }
 
