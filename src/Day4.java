@@ -26,8 +26,8 @@ public class Day4 {
                         // I AM NOT WRITING ANOTHER checkM
                         // :(
                         try {
-                            if (charMatrix.get(i + offset.x*2).get(j + offset.y*2) == 'A' 
-                            && charMatrix.get(i + offset.x*3).get(j + offset.y*3) == 'S') count++;
+                            if (charMatrix.get(i + offset.y*2).get(j + offset.x*2) == 'A' 
+                            && charMatrix.get(i + offset.y*3).get(j + offset.x*3) == 'S') count++;
                         } catch (Exception e) {
                         }
                     }
@@ -43,77 +43,28 @@ public class Day4 {
     public static ArrayList<Offset> checkM (int[] coordinates, ArrayList<ArrayList<Character>> charMatrix) {
         ArrayList<Offset> foundM = new ArrayList<>();
         //topmost row
-        if (coordinates[0] == 0) {
-            //leftmost
-            if (coordinates[1] == 0) {
-                if (charMatrix.get(0).get(1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(1).get(1) == 'M') foundM.add(new Offset(1, 1));
-                if (charMatrix.get(1).get(0) == 'M') foundM.add(new Offset(1, 0));
-            }
-            //rightmost
-            else if (coordinates[1] == charMatrix.get(0).size()-1) {
-                if (charMatrix.get(0).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(1, -1));
-                if (charMatrix.get(1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-            }
-            else {
-                if (charMatrix.get(0).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(1, -1));
-                if (charMatrix.get(1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-                if (charMatrix.get(0).get(coordinates[1]+1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(1, 1));
-            }
-        }
-        // bottommost row
-        else if (coordinates[0] == charMatrix.size()-1) {
-            //leftmost
-            if (coordinates[1] == 0) {
-                if (charMatrix.get(coordinates[0]).get(1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(coordinates[0]-1).get(1) == 'M') foundM.add(new Offset(-1, 1));
-                if (charMatrix.get(coordinates[0]-1).get(0) == 'M') foundM.add(new Offset(-1, 0));
-            }
-            //rightmost
-            else if (coordinates[1] == charMatrix.get(0).size()-1) {
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(-1, -1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]) == 'M') foundM.add(new Offset(-1, 0));
-            }
-            else {
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(-1, -1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]+1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(-1, 1));
+        Offset[] offsets = new Offset[]{
+            new Offset(0, -1),
+            new Offset(-1, -1),
+            new Offset(-1, 0),
+            new Offset(-1, 1),
+            new Offset(0, 1),
+            new Offset(1, 1),
+            new Offset(1, 0),
+            new Offset(1, -1),
+        };
+
+        for (Offset offset : offsets) {
+            if (offset.y == -1 && coordinates[0] == 0) continue;
+            if (offset.y == 1 && coordinates[0] == charMatrix.get(0).size()-1) continue;
+            if (offset.x == -1 && coordinates[1] == 0) continue;
+            if (offset.x == 1 && coordinates[1] == charMatrix.size()-1) continue;
+
+            if (charMatrix.get(coordinates[0] + offset.y).get(coordinates[1] + offset.x) == 'M') {
+                foundM.add(offset);
             }
         }
-        else {
-            //leftmost
-            if (coordinates[1] == 0) {
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]) == 'M') foundM.add(new Offset(-1, 0));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(-1, 1));
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]+1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(1, 1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-            }
-            //rightmost
-            else if (coordinates[1] == charMatrix.get(0).size()-1) {
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]) == 'M') foundM.add(new Offset(-1, 0));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(-1, -1));
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(1, -1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-            }
-            else {
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]) == 'M') foundM.add(new Offset(-1, 0));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(-1, -1));
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]-1) == 'M') foundM.add(new Offset(0, -1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]-1) == 'M') foundM.add(new Offset(1, -1));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]) == 'M') foundM.add(new Offset(1, 0));
-                if (charMatrix.get(coordinates[0]+1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(1, 1));
-                if (charMatrix.get(coordinates[0]).get(coordinates[1]+1) == 'M') foundM.add(new Offset(0, 1));
-                if (charMatrix.get(coordinates[0]-1).get(coordinates[1]+1) == 'M') foundM.add(new Offset(-1, 1));
-            }
-        }
+      
 
         return foundM;
     }
