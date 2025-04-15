@@ -55,7 +55,6 @@ public class Day6 {
                 if (col == 'X') count++;
             }
         }
-        for (List<Character> row : map) System.out.println(row);
         System.out.println(count);
     }
 }
