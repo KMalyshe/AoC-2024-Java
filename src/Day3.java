@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*;
 
+import Helpers.InputHelper;
+
 public class Day3 {
     public static void main(String[] args) {
         InputHelper helper = new InputHelper();

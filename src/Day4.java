@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import Helpers.InputHelper;
+
 public class Day4 {
     
     public static void main(String[] args) {
